@@ -1,0 +1,8 @@
+@import "app_vars";
+
+.header-row{
+    background-color: $header-background;
+    border-color: $header-background;
+    color: $secondary-color;
+    padding-left:20px;
+}

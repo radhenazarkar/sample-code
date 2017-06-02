@@ -1,0 +1,12 @@
+@import "app_vars";
+@import "app_mixins";
+
+body{
+  background:$primary-background;
+}
+
+.spacer-section{
+  height:20px;
+}
+
+@include marginBottom(20)

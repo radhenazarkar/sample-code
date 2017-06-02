@@ -1,0 +1,363 @@
+/** Header Style Start **/
+.header {
+    background-color: #1f648c;
+    height: 40px;
+    text-align: center;
+    color: #fff;
+    line-height: 35px;
+}
+.contentWrapper {
+    height: 100%;
+}
+/** Header Style Ends **/
+
+/** Board List Style Start **/
+.boardListWrapper {
+    padding: 20px 0px 0px 20px;
+}
+.boardListWrapper ul {
+    margin-top: 10px;
+    display: inline-block;
+    width: 100%;
+}
+.boardListWrapper li{
+    background-color: #27709b;
+    padding: 10px;
+    margin-right: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: 500;
+    border-radius: 3px;
+    float: left;
+}
+.boardListWrapper li a{
+    width: 250px;
+    height: 80px;
+    color: #fff;
+    display: inline-block;
+}
+.boardListWrapper li:hover{
+    background-color: #255A79
+}
+
+/** Board List Style Ends **/
+
+/** Board Wrapper Style Start **/
+.boardWrapper {
+    padding: 20px;
+    background-color: #27709b;
+    height: 100%;
+    display: inline-block;
+    width: 100%;
+}
+.boardListPanel {
+    background-color: #e3e3e3;
+    width: 200px;
+    border-radius: 3px;
+    margin: 10px;
+    margin-left: 0px;
+    float: left;
+    padding: 10px;
+    cursor: move;
+    cursor: -webkit-grab;
+}
+.boardListPanel ul li {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 3px;
+    margin-top: 10px;
+    cursor: pointer;
+    box-shadow: 0px 0px 2px #bbb;
+}
+.addCardWrapper {
+    padding: 10px;
+    color: #999;
+    cursor: pointer;
+    margin-left: -10px;
+    width: 200px;
+    margin-bottom: -6px;
+    display: none;
+}
+.addCardWrapper:hover{
+    background-color: #ccc;
+    text-decoration: underline;
+}
+.boardListPanel ul  li.listAddTextWrap {
+    padding: 0px;
+    background-color: transparent;
+    display: block;
+    box-shadow: none;
+}
+.listAddTextWrap textarea{
+    border-radius: 3px;
+    resize: vertical;
+    border: none;
+    height: 60px;
+    width: 195px;
+    margin: 0px;
+    box-shadow: 0px 0px 2px #bbb;
+}
+.btnWrapper {
+    padding-top: 10px;
+}
+.greenBtn {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #1d8820;
+    color: #fff;
+    border-radius: 3px;
+    font-size: 14px;
+    cursor: pointer;
+}
+.greenBtn:hover{
+    background-color: #1B721E;
+}
+.boardListPanel.addCardActive ul li.listAddTextWrap{
+    display: none;
+}
+.addCardActive .addCardWrapper {
+    display: block;
+}
+.crossIcon:before {
+    font-size: 20px;
+    color: #999;
+    cursor: pointer;
+    margin-left: 10px;
+    display: inline-block;
+    position: relative;
+    top: 2px;
+    content: "X";
+}
+.addBoard {
+    position: absolute;
+    left: 10px;
+    background: #79A5BF;
+    border-radius: 5px;
+    width: 30px;
+    height: 30px;
+    top: 5px;
+    cursor: pointer;
+}
+.addBoard:before {
+    font-size: 30px;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    content: "+";
+    top: -6px;
+    position: relative;
+}
+.addBoard:hover{
+    background: #5389A8;
+}
+.mask{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
+    z-index: 100;
+    display: none;
+}
+.mask:after {
+    content: "X";
+    position: absolute;
+    color: #999;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+.createBoardWrapper {
+    position: absolute;
+    display: none;
+    width: 275px;
+    background-color: #ffffff;
+    height: 155px;
+    top: 40px;
+    left: 9px;
+    border: 1px solid #ccc;
+    box-shadow: 0px 0px 2px #ccc;
+    border-radius: 5px;
+    z-index: 10;
+    font-size: 14px;
+    color: #999;
+    padding: 10px;
+}
+#createNewBoard {
+    display: block;
+    width: 270px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.cbHeader {
+    text-align: center;
+    color: #999;
+    padding-bottom: 7px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+    font-size: 14px;
+}
+.createBoardWrapper .crossIcon{
+    position: absolute;
+    right: 7px;
+    top: 0px;
+}
+.trelloInput {
+    border: 1px solid #ccc;
+    height: 25px;
+    padding-left: 3px;
+}
+.addBoardListPanel {
+    background-color: transparent;
+    width: 220px;
+    margin: 10px;
+    margin-left: 0px;
+    float: left;
+}
+.addNewListCls{
+    background-color: rgba(0, 0, 0, 0.25);
+    padding: 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    color: #f2f2f2;
+    display: none;
+}
+.addNewListCls:hover{
+    background-color: rgba(0, 0, 0, 0.45);
+}
+.addCardActive .addNewListCls{
+    display: block;
+}
+.addCardActive .listAddTextWrap {
+    display: none;
+}
+.addBoardListPanel .listAddTextWrap{
+    background-color: #e3e3e3;
+    width: 214px;
+    border-radius: 3px;
+    padding: 3px;
+}
+.boardListPanel .listAddTextWrap{
+    margin-top: 10px;
+}
+.addBoardListPanel .trelloInput{
+    border-radius: 3px;
+    width: 208px;
+    margin-bottom: 3px;
+}
+.highlight-li {
+    background: rgba(0, 0, 0, 0.25) !important;
+}
+.listUl {
+    padding: 5px 0px;
+}
+.boardMenu{
+    position: absolute;
+    left: 46px;
+    background: #79A5BF;
+    border-radius: 3px;
+    top: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 0px 10px;
+    line-height: 30px;
+}
+#boardMenuWrapperId{
+    height: auto;
+}
+#boardMenuWrapperId li {
+    border-bottom: 1px solid #ccc;
+    padding: 5px 0px;
+}
+#boardMenuWrapperId li:last-child{
+    border-color: transparent;
+}
+#boardMenuWrapperId li a {
+    color: #333;
+}
+.homeIcon{
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    background-image: url("http://img3.wikia.nocookie.net/__cb20131126195004/epicrapbattlesofhistory/images/a/aa/Home_icon_grey.png");
+    position: absolute;
+    left: 10px;
+    background-size: 100% 100%;
+    top: 4px;
+}
+#taskEditWrapId {
+    position: absolute;
+    display: none;
+    width: 350px;
+    height: 105px;
+    top: 0px;
+    left: 0px;
+    z-index: 105;
+}
+.taskLi {
+    position: relative;
+}
+.colorWrapper {
+    position: absolute;
+    top: -7px;
+}
+.colorStrip {
+    display: inline-block;
+    background-color: transparent;
+    width: 25px;
+    height: 4px;
+    margin-right: 5px;
+}
+.changeLabelText {
+    background: rgba(0, 0, 0, 0.3);
+    color: #fff;
+    padding: 10px;
+    margin-left: 10px;
+    border-radius: 3px;
+    display: inline-block;
+    cursor: pointer;
+}
+.editLabelWrapper {
+    position: absolute;
+    background: #fff;
+    width: 280px;
+    height: auto;
+    z-index: 107;
+    border-radius: 5px;
+    left: 0px;
+    top: 0px;
+}
+.editLabelWrapper li {
+    height: 30px;
+    display: block;
+    background-color: transparent;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    width: 200px;
+    position: relative;
+}
+.editLabelWrapper li:last-child{
+    margin: 0px;
+}
+.editLabelWrapper li:hover{
+    width: 230px;
+}
+.editLabelWrapper li.selected{
+    width: 100%;
+}
+.editLabelWrapper ul {
+    padding: 5px;
+}
+.editLabelWrapper li.colorLabel.selected span {
+    background-image: url("http://www.clipartbest.com/cliparts/KTj/qR9/KTjqR9bTq.png");
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    position: absolute;
+    right: 8px;
+    background-size: 100% 100%;
+    top: 3px;
+}
+
+/** Board Wrapper Style Ends **/

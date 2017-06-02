@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Board</title>
+
+    <!-- favicon.ico -->
+    <link rel="icon" href="resources/images/icons/favicon.ico" type="image/png" sizes="16x16"/>
+    <link rel="icon" href="resources/images/icons/favicon.ico" type="image/png" sizes="32x32"/>
+    <link rel="icon" href="resources/images/icons/favicon.ico" type="image/png" sizes="64x64"/>
+
+    <!-- css -->
+    <link href="resources/css/reset.css" media="all" rel="stylesheet" />
+    <link href="resources/css/common.css" media="all" rel="stylesheet" />
+    <link href="resources/css/style.css" media="all" rel="stylesheet" />
+
+    <!-- libs -->
+    <script type="text/javascript" src="resources/libs/jquery-2.1.1.min.js"></script>
+
+</head>
+<body>
+<div class="mask"></div>
+<div id="taskEditWrapId">
+    <div class="listAddTextWrap fL">
+        <textarea></textarea>
+        <div class="btnWrapper">
+            <span class="editSaveTaskBtn greenBtn">Save</span>
+        </div>
+    </div>
+    <div class="fL">
+        <span class="changeLabelText">Edit Labels</span>
+    </div>
+</div>
+<div class="editLabelWrapper createBoardWrapper">
+    <div class="cbHeader">Labels</div>
+    <span class="crossIcon closeLabelPopCls"></span>
+    <ul>
+        <li class="colorLabel" style="background-color: #34b27d;" data-label-id="#34b27d"><span></span></li>
+        <li class="colorLabel" style="background-color: #dbdb57;" data-label-id="#dbdb57"><span></span></li>
+        <li class="colorLabel" style="background-color: #e09952;" data-label-id="#e09952"><span></span></li>
+        <li class="colorLabel" style="background-color: #cb4d4d;" data-label-id="#cb4d4d"><span></span></li>
+        <li class="colorLabel" style="background-color: #93c93c;" data-label-id="#93c93c"><span></span></li>
+        <li class="colorLabel" style="background-color: #4d77cb;" data-label-id="#4d77cb"><span></span></li>
+    </ul>
+</div>
+<div id="boardMenuWrapperId" class="createBoardWrapper">
+    <div class="cbHeader">My Boards</div>
+    <span class="crossIcon closeMenuCls"></span>
+    <ul></ul>
+</div>
+<div class="header f20">Test
+    <a href="index.html" class="homeIcon"></a>
+    <span class="boardMenu">Boards</span>
+</div>
+<div class="contentWrapper">
+   <div class="boardWrapper">
+       <div id="boardTitleId" class="colorFFF fB f18"></div>
+       <div id="boardListContainer">
+       </div>
+       <div id="addNewListId" class="addBoardListPanel addCardActive">
+           <ul>
+               <li class="addNewListCls">Add a list...</li>
+               <li class="listAddTextWrap">
+                   <input type="text" class="trelloInput" placeholder="Add a list..." id="createNewListInput"/>
+                   <div><span id="createListBtn" class="greenBtn">Save</span><span class="crossIcon closelistCls"></span></div>
+               </li>
+           </ul>
+       </div>
+   </div>
+</div>
+<!-- js -->
+    <script type="text/javascript" src="resources/libs/jquery-ui.js"></script>
+    <script type="text/javascript" src="resources/libs/mustache.js"></script>
+    <script type="text/javascript" src="resources/js/common.js"></script>
+    <script type="text/javascript" src="resources/js/boardPage.js"></script>
+    <script>
+        // Init helper
+        $(function(){
+            boardObj = new Trello.BoardPage({});
+        });
+    </script>
+</body>
+</html>

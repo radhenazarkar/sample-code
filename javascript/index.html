@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome Board | Demo</title>
+
+    <!-- favicon.ico -->
+    <link rel="icon" href="resources/images/icons/favicon.ico" type="image/png" sizes="16x16"/>
+    <link rel="icon" href="resources/images/icons/favicon.ico" type="image/png" sizes="32x32"/>
+    <link rel="icon" href="resources/images/icons/favicon.ico" type="image/png" sizes="64x64"/>
+
+    <!-- css -->
+    <link href="resources/css/reset.css" media="all" rel="stylesheet" />
+    <link href="resources/css/common.css" media="all" rel="stylesheet" />
+    <link href="resources/css/style.css" media="all" rel="stylesheet" />
+
+    <!-- libs -->
+    <script type="text/javascript" src="resources/libs/jquery-2.1.1.min.js"></script>
+
+</head>
+<body>
+    <div id="createNewBoardId" class="createBoardWrapper">
+          <div class="cbHeader">Create Board</div>
+          <span class="crossIcon"></span>
+          <div>
+              <div>Title</div>
+              <input type="text" class="trelloInput" placeholder="Untitled Board" id="createNewBoard"/>
+              This board will be <b>private</b>.
+              <div class="btnWrapper"><span id="createGroupBtn" class="greenBtn">Create</span></div>
+          </div>
+    </div>
+    <div class="header f20 poRel">Demo<span class="addBoard"></span></div>
+    <div class="contentWrapper">
+           <div class="boardListWrapper">
+               <div class="fB f18">My Boards</div>
+               <ul id="boardUlId"></ul>
+           </div>
+    </div>
+
+
+    <!-- js -->
+    <script type="text/javascript" src="resources/libs/mustache.js"></script>
+    <script type="text/javascript" src="resources/js/common.js"></script>
+    <script type="text/javascript" src="resources/js/boardHome.js"></script>
+    <script>
+        // Init helper
+        $(function(){
+            var boardHomeObj = new Trello.BoardHome({});
+        });
+    </script>
+
+</body>
+</html>

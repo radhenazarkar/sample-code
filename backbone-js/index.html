@@ -1,0 +1,276 @@
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <meta charset="utf-8">
+    <title>Flight Search Engine</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="vendor/css/select2.min.css"/>
+    <link rel="stylesheet" type="text/css" href="vendor/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="vendor/css/bootstrap-datepicker3.min.css"/>
+    <link rel="stylesheet" type="text/css" href="vendor/css/jquery-ui.min.css"/>
+    <link rel="stylesheet" href="styles/main.css"/>
+    </head>
+    <body>
+
+    <div class="container-fluid">
+    <div class="row header-row">
+        <div class="col-xs-12 text-center">
+            <h1>Flight Search Engine</h1>
+        </div>
+    </div>
+    <div class="spacer-section"></div>
+    <div class="row" id="flight_search_wrapper">
+        <div id="flight_search_form_wrapper" class="col-xs-12  col-md-3 search_form_cols">
+
+        </div>
+        <div id="flight_search_result" class="col-xs-12 col-md-9 search_form_cols">
+
+        </div>
+
+    </div>
+
+    <!-- start templates -->
+    <script type="text/template" id="flightSearchForm">
+        <div id="flight_search_form" class="search_form_widgets margin-bottom-20">
+            <div class="form-group" style="margin-top: 15px;"><label for="flight_search_one_way"
+                                                                     class="label_for_flight_type"><input type="radio"
+                                                                                                          id="flight_search_one_way"
+                                                                                                          class="flight-type"
+                                                                                                          name="flight-type"
+                                                                                                          value="one_way"
+                                                                                                          {{#isOneWay}}
+                                                                                                          checked="checked"
+                                                                                                          {{/isOneWay}}><span
+class="inline-label">One way</span>
+                    </label><label class="label_for_flight_type"
+                                                                      for="flight_search_return"><input
+                    id="flight_search_return" type="radio" class="flight-type" name="flight-type" value="return_trip"
+                    {{^isOneWay}}
+                    checked="checked"
+                    {{/isOneWay}}><span
+                    class="inline-label">Return</span></label>
+            </div>
+            <div class="form-group">
+                <select id="flight_search_origin" data-place-holder="Enter Origin City"
+                        class="jselectpicker col-xs-12">
+                    <option></option>
+                    {{#cities}}
+                    <option value="{{iata}}">{{label}}</option>
+                    {{/cities}}
+                </select>
+            </div>
+            <div class="form-group">
+                <select id="flight_search_destination" data-place-holder="Enter Destination City"
+                        class="jselectpicker col-xs-12">
+                    <option></option>
+                    {{#cities}}
+                    <option value="{{iata}}">{{label}}</option>
+                    {{/cities}}
+                </select>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-xs-12 col-md-6">
+                        <input type="text" class="input-sm form-control" id="start_date"
+                               placeholder="Departure Date"/>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <input type="text" class="input-sm form-control" id="end_date" placeholder="Arrival Date"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-xs-6">
+                        Adult <select id="adult_passengers"
+                                      class="jNormalSelectPicker">
+                        {{#adultRange}}
+                        <option value="{{value}}">{{value}}</option>
+                        {{/adultRange}}
+                    </select>
+                    </div>
+                    <div class="col-xs-6">
+                        Child <select id="child_passengers" class="jNormalSelectPicker">
+                        {{#childRange}}
+                        <option value="{{value}}">{{value}}</option>
+                        {{/childRange}}
+                    </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group text-center ">
+                <button id="seach_flight_button" class="search-form-button btn btn-primary">Search Flights</button>
+            </div>
+            <div class="text-center">
+                <span id="search_result_info"></span>
+            </div>
+            <div id="flight_errors_wrapper">
+                <ul id="flight_errors"></ul>
+            </div>
+            <div id="max_min_search_form" data-curr-state="max"><span class="glyphicon glyphicon-minus"></span></div>
+        </div>
+        <div id="flight_advance_filter" class="search_form_widgets text-center"> Filter</div>
+    </script>
+
+    <script type="text/template" id="flightAdvanceFilter">
+        <div id="flight_rate_filter"></div>
+        <div id="amount"></div>
+    </script>
+
+    <script type="text/template" id="flightErrorTemplate">
+        {{#errors}}
+        <li>{{msg}}</li>
+        {{/errors}}
+    </script>
+
+    <script type="text/template" id="flightSearchInfo">
+        <div class="row">
+            <div class="col-sm-8 col-xs-6 heading-3 search-info-col">
+                {{flight_header}}
+            </div><div class="col-xs-6 col-sm-4 text-right  search-info-col">
+                <div>Departs:{{dep_date}}</div>
+                {{#arr_date}}
+                <div>Arrival:{{arr_date}}</div>
+                {{/arr_date}}
+
+            </div>
+        </div>
+    </script>
+
+    <script type="text/template" id="flightSearchMainWrapperContent">
+        <div id="search_flight_intro" class="search_form_widgets">
+            <h1 style="margin-top: 10px;">Search flights</h1>
+            <h4>Fly anywhere. Fly everywhere.</h4>
+            <img src="assets/img/flight_banner.png" class="img-responsive"/>
+        </div>
+        <div id="flight_search_info" class="search_form_widgets container-fluid"></div>
+        <div id="flight_return_trip_summary" class="search_form_widgets">
+            <div class="flex-row">
+                <div class="flex-col">Flight Fare <span id="flight_return_complete_fair"></span></div>
+                <div class="flex-col text-right"><button class="btn btn-primary book-return-trip">BOOK</button></div>
+            </div>
+        </div>
+        <div id="flight_search_result_detail" class="search_form_widgets container-fluid"></div>
+    </script>
+    <script type="text/template" id="flightSearchOneWayResults">
+        <div class="row flightSearchHeader">
+            <div class="col-xs-2 hidden-xs">Flight</div>
+            <div class="col-xs-4 col-sm-2">Departure</div>
+            <div class="col-xs-4 col-sm-2">Arrival</div>
+            <div class="col-xs-2 hidden-xs">Duration</div>
+            <div class="col-xs-4 col-sm-2 ">Price</div>
+            <div class="col-xs-2 hidden-xs"></div>
+        </div>
+        {{#flightsData}}
+        <div class="row flightSearchContent" data-model-id = "{{model_id}}">
+            <div class="col-xs-3 col-sm-2">{{flight_name}}<div class="flight-code">{{flight_code}}</div></div>
+            <div class="col-xs-3 col-sm-2">
+                <span class="flight-departure-time">{{departure_time}}</span>
+                <span class="flight-duration hidden-sm hidden-lg hidden-md hidden-xl">{{duration}}</span>
+            </div>
+            <div class="col-xs-3 col-sm-2">{{arrival_time}}</div>
+            <div class="col-xs-2 hidden-xs">{{duration}}</div>
+            <div class="col-xs-3 col-sm-2 flight-price book-flight">{{price}}</div>
+            <div class="col-xs-2 hidden-xs">
+                <button class="book-flight btn btn-primary">Book</button>
+            </div>
+        </div>
+        {{/flightsData}}
+        {{^flightsData}}
+        <div class="no-result-found">Sorry. Could not find any flights...</div>
+        {{/flightsData}}
+    </script>
+
+
+    <script type="text/template" id="flightSearchReturnResults">
+        <div class="flex-row">
+            <div class="flex-col col-from container-fluid">
+                <div class="row flightSearchHeader">
+                    <div class="col-xs-6 col-sm-3">Flight</div>
+                    <div class="col-xs-6 col-sm-3">Dept/Arr</div>
+                    <div class="col-xs-3 hidden-xs">Duration</div>
+                    <div class="col-xs-3 hidden-xs">Price</div>
+                </div>
+                {{#origFlightsData}}
+                <div class="row flightSearchContent {{#isSelected}}flight-selected{{/isSelected}}" data-model-id = "{{model_id}}">
+                    <div class="col-xs-6 col-sm-3">{{flight_name}}<div class="flight-code">{{flight_code}}</div></div>
+                    <div class="col-xs-6 col-sm-3">
+                        <span class="flight-departure-time">D:{{departure_time}}<br/>A:{{arrival_time}}</span>
+                        <span class="flight-duration hidden-sm hidden-lg hidden-md hidden-xl">{{duration}}</span>
+                        <span class=" flight-price hidden-sm hidden-lg hidden-md hidden-xl">{{price}}</span>
+                    </div>
+                    <div class="col-xs-3 hidden-xs">{{duration}}
+                        <span class="flight-duration hidden-sm hidden-lg hidden-md hidden-xl">{{duration}}</span>
+                    </div>
+                    <div class=" col-sm-3 hidden-xs">{{price}}</div>
+                </div>
+                {{/origFlightsData}}
+                {{^origFlightsData}}
+                <div class="no-result-found">Sorry. Could not find any flights...</div>
+                {{/origFlightsData}}
+            </div>
+            <div class="flex-col col-to container-fluid" style="border-left: 2px solid #2a88bd;">
+                <div class="row flightSearchHeader">
+                    <div class="col-xs-6 col-sm-3">Flight</div>
+                    <div class="col-xs-6 col-sm-3">Dept/Arr</div>
+                    <div class="col-xs-3 hidden-xs">Duration</div>
+                    <div class="col-xs-3 hidden-xs">Price</div>
+                </div>
+                {{#destFlightData}}
+                <div class="row flightSearchContent {{#isSelected}}flight-selected{{/isSelected}}" data-model-id = "{{model_id}}">
+                    <div class="col-xs-6 col-sm-3">{{flight_name}}<div class="flight-code">{{flight_code}}</div></div>
+                    <div class="col-xs-6 col-sm-3">
+                        <span class="flight-departure-time">D:{{departure_time}}<br/>A:{{arrival_time}}</span>
+                        <span class="flight-duration hidden-sm hidden-lg hidden-md hidden-xl">{{duration}}</span>
+                        <span class=" flight-price hidden-sm hidden-lg hidden-md hidden-xl">{{price}}</span>
+                    </div>
+                    <div class="col-xs-3 hidden-xs">{{duration}}
+                        <span class="flight-duration hidden-sm hidden-lg hidden-md hidden-xl">{{duration}}</span>
+                    </div>
+                    <div class=" col-sm-3 hidden-xs">{{price}}</div>
+                </div>
+                {{/destFlightData}}
+                {{^destFlightData}}
+                <div class="no-result-found">Sorry. Could not find any flights...</div>
+                {{/destFlightData}}
+            </div>
+        </div>
+    </script>
+    <!-- end templates -->
+
+    <!-- vendor scripts -->
+    <script src="vendor/js/jquery.min.js"></script>
+    <script src="vendor/js/underscore.min.js"></script>
+    <script src="vendor/js/backbone.min.js"></script>
+    <script src="vendor/js/mustache.min.js"></script>
+    <script src="vendor/js/select2.min.js"></script>
+    <script src="vendor/js/bootstrap-datepicker.min.js"></script>
+    <script src="vendor/js/moment.min.js"></script>
+    <script src="vendor/js/jquery-ui.min.js"></script>
+    <script src="vendor/js/touchpunch.js"></script>
+    <!-- end vendor scripts -->
+
+    <!-- application scripts -->
+    <script src="scripts/utils/pageLoader.js"></script>
+    <script src="scripts/main.js"></script>
+    <script src="scripts/data/city_data.js"></script>
+
+    <!--this is flight data generator to build data runtime-->
+    <!--<script src="scripts/data/flight_data_generator.js"></script>-->
+    <!--Use this file for static codes-->
+    <script src="scripts/data/flight_data.js"></script>
+    <script src="scripts/utils/common.js"></script>
+    <script src="scripts/enums/flightEnums.js"></script>
+    <script src="scripts/models/searchFlightMainModel.js"></script>
+    <script src="scripts/collections/flightDataCollection.js"></script>
+    <script src="scripts/models/flightDataModel.js"></script>
+    <script src="scripts/views/flightSearchMainView.js"></script>
+    <script src="scripts/views/searchFlight.js"></script>
+    <script src="scripts/views/searchResult.js"></script>
+    <script src="scripts/collections/flightDataCollection.js"></script>
+    <script src="scripts/views/flightSearchMainView.js"></script>
+    <!-- end application script -->
+    </body>
+    </html>

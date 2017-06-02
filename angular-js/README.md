@@ -1,0 +1,1 @@
+Sample Angular JS Plugin code is using angular.js, angular-ui-bootstrap, jquery, html, css

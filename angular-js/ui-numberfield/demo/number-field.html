@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Number Demo Using AngularJS, Bootstrap</title>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="UTF-8">
+		<meta name="description" content="Number Field Demo Using AngularJS, Bootstrap.">
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.js"></script>
+
+
+<script src="../src/number-field.js"></script>
+
+<script type="text/javascript">
+	var app = angular.module('numberFieldDemo', [ 'ui.numberfield' ])
+	app.controller('NumberFieldDemoCtrl', function($scope) {
+				$scope.numberModel1 = 1;
+				$scope.numberModel2 = 10;
+	});
+</script>
+
+</head>
+<body>
+	<div class="container" ng-app="numberFieldDemo">
+		<div class="col-md-offset-3 col-md-3" ng-controller='NumberFieldDemoCtrl'>
+			<h1>Number Field Demo</h1>
+			<div>
+				Demo 1<br/>	
+				Min: -10<br/>
+				Max: 10
+			</div>
+			<number-field number-model="numberModel1"  min="-10" max="10"></number-field>
+			<br/>
+			<div>
+				Demo 2<br/>
+				min & max optional
+			</div>
+			<number-field number-model="numberModel2"></number-field>
+		</div>
+	</div>
+</body>
+</html>

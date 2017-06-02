@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Days Selector Using AngularJS, Bootstrap</title>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="UTF-8">
+		<meta name="description" content="Days Selector Demo Using AngularJS, Bootstrap.">
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.js"></script>
+
+		<script src="../src/ui-days-selector.js"></script>
+
+		<script type="text/javascript">
+			var app = angular.module('daysSelectoreDemo', [ 'ui.daysSelector' ])
+			app.controller('DaysSelectorDemoCtrl', function($scope) {
+			   $scope.selectedDays = ['th', 'su'];
+
+			   $scope.afterToggle = function(days){
+			        $scope.selectedDays =  days;
+			   }
+			});
+		</script>
+		<style type="text/css">
+			.ui-days-wrap button {
+				border-radius: 0px;
+				margin-right: 10px;
+				margin-top: 10px;
+				color: #333;
+			}
+			.ui-days-wrap button.active_toggle{
+				background: #337ab7;
+				color: #fff;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container" ng-app="daysSelectoreDemo">
+			<div class="col-md-offset-3 col-md-3" ng-controller="DaysSelectorDemoCtrl" >
+				<h1>Days Selector Demo</h1>
+				<days-selector is-show-all=true selected-days="selectedDays" after-toggle="afterToggle(selectedDays)"></days-selector>
+
+			 	<h3>Selected Days</h3>
+			 	<div><span ng-bind="selectedDays.length"></span> days selected</div>
+			 	<div ng-repeat="d in selectedDays">{{d}}</div>
+			</div>
+		</div>
+	</body>
+</html>

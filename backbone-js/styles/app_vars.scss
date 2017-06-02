@@ -1,0 +1,64 @@
+$screen-xs: 320px;
+$screen-xs-min: 1px;
+$screen-xs-max: 767px;
+
+$screen-sm-min: 768px;
+$screen-sm-max: 991px;
+
+$screen-md-min: 1024px;
+$screen-md-max : 1199px;
+
+$screen-lg-min: 1201px;
+$screen-lg-max: 1599px;
+
+$screen-xl-min: 1600px;
+
+$sprite-retina-location: "//d1w8j6pmwcehqo.cloudfront.net/assets/sprites/sprite-hem-retina-v80.png";
+$sprite-location: "//d1w8j6pmwcehqo.cloudfront.net/assets/sprites/sprite-hem-v80.png";
+
+$primary-color: #000000;
+$secondary-color: #ffffff;
+
+$primary-background: #f5f8fa;
+$secondary-background: #ffffff;
+$header-background: #3097d1;
+
+
+@mixin custom-icon-generator($sprite-location,$sprite-retina-location,$sprite-width, $sprite-height, $width,$height,$posX,$posY,$offsetHover,$offsetActive, $x-stretch){
+  background-image: url($sprite-location);
+  @media
+  only screen and (-webkit-min-device-pixel-ratio: 2),
+  only screen and (   min--moz-device-pixel-ratio: 2),
+  only screen and (     -o-min-device-pixel-ratio: 2/1),
+  only screen and (        min-device-pixel-ratio: 2),
+  only screen and (                min-resolution: 192dpi),
+  only screen and (                min-resolution: 2dppx) {
+    background-image: url($sprite-retina-location);
+    background-size: $sprite-width $sprite-height;
+  }
+  display: inline-block;
+  &:focus{
+    outline: none;
+    background-position: $posX $posY;
+  }
+  width: $width;
+  height: $height;
+  background-position: $posX $posY;
+  @if $x-stretch == true {
+    &:hover{
+      background-position: $offsetHover $posY;
+    }
+    &:active{
+      background-position: $offsetActive $posY;
+    }
+
+  } @else {
+    &:hover{
+      background-position:$posX $offsetHover;
+    }
+    &:active{
+      background-position:$posX $offsetActive;
+    }
+  }
+
+}

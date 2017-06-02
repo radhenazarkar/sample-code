@@ -1,0 +1,237 @@
+@import "app_vars";
+
+#flight_search_wrapper {
+  padding: 30px;
+  color: $primary-color;
+  @media (max-width: $screen-xs-max) {
+    padding: 10px;
+  }
+}
+
+#search_form_cols {
+  padding: 10px;
+}
+
+.search_form_widgets {
+  background-color: #ffffff;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  border-color: #d3e0e9;
+  padding: 15px;
+}
+
+.flight-type {
+  display: none;
+}
+
+.flight-type:checked + .inline-label {
+  color: #ffffff;
+  background-color: #2a88bd;
+}
+
+.inline-label {
+  text-align: center;
+  display: block;
+  cursor: pointer;
+  padding: 8px 10px;
+  border: 1px solid #2a88bd;
+  color: #2a88bd;
+}
+
+.label_for_flight_type {
+  display: inline-block;
+  width: 50%;
+}
+
+.search-form-button {
+  width: 90%;
+  @media (max-width: $screen-sm-max) {
+    width: 100%;
+  }
+}
+
+@media (max-width: $screen-sm-max) {
+  #start_date {
+    margin-bottom: 15px;
+  }
+  #flight_search_result {
+    margin-top: 20px;
+  }
+
+}
+
+#flight_search_form {
+  overflow: hidden;
+  max-height: 600px;
+  position: relative;
+  @media (max-width: $screen-sm-max) {
+    padding-top: 20px;
+    &.minimize {
+      max-height: 30px;
+
+    }
+  }
+  -webkit-transition: max-height 500ms ease-out;
+  -moz-transition: max-height 500ms ease-out;
+  -o-transition: max-height 500ms ease-out;
+  transition: max-height 500ms ease-out;
+}
+
+#max_min_search_form {
+  display: none;
+  color: #2a88bd;
+  position: absolute;
+  top: 0px;
+  right: 5px;
+  height: 22px;
+  width: 30px;
+  text-align: center;
+  font-size: 1.5em;
+  @media (max-width: $screen-sm-max) {
+    display: block;
+  }
+  cursor: pointer;
+}
+
+#flight_errors_wrapper {
+  color: #ff0000;
+  background: #f5d7d7;
+}
+
+#flight_errors {
+  display: none;
+  padding: 10px 25px 10px 35px;
+}
+
+#flight_search_info, #flight_search_result_detail, #flight_return_trip_summary {
+  display: none;
+}
+
+.search-info-col {
+  vertical-align: middle;
+  display: inline-block;
+  float: none;
+  @media (max-width: $screen-xs-max) {
+    font-size: 9px;
+  }
+}
+
+.heading-3 {
+  font-size: 30px;
+  @media (max-width: $screen-xs-max) {
+    font-size: 15px;
+  }
+}
+
+.flightSearchHeader {
+  border-bottom: 1px solid #2a88bd;
+  text-align: center;
+  color: #2a88bd;
+  padding: 10px 0px;
+}
+
+#flight_search_result_detail {
+  margin-top: 15px;
+  padding: 0px 15px;
+}
+
+.no-result-found {
+  font-size: 15px;
+  color: #aaaaaa;
+  padding-top: 10px;
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.flightSearchContent {
+  padding-top: 12px;
+  text-align: center;
+  border-top: 1px solid #2a88bd;
+  padding-bottom: 10px;
+  .col-xs-3 {
+    padding-right: 5px;
+    padding-left: 5px;
+  }
+}
+
+.flight-code {
+  color: #aaaaaa;
+}
+
+.flight-departure-time, .flight-duration, .flight-price {
+  display: block;
+}
+
+@media (max-width: $screen-xs-max) {
+  .flight-price {
+    color: #ff0000;
+    font-weight: bold;
+    cursor: pointer;
+  }
+}
+
+.flight_one_way {
+  .flightSearchHeader {
+    font-size: 18px;
+  }
+  @media (max-width: $screen-xs-max) {
+    .flightSearchContent, .flightSearchHeader {
+      font-size: 12px;
+    }
+  }
+  .flight-code {
+    font-size: 10px;
+  }
+
+}
+
+#flight_search_result_detail.flight_return {
+  cursor: pointer;
+  padding: 0px;
+  .flightSearchHeader {
+    font-size: 14px;
+  }
+  @media (max-width: $screen-xs-max) {
+    .flightSearchContent, .flightSearchHeader {
+      font-size: 10px;
+    }
+  }
+  .flight-code {
+    font-size: 8px;
+  }
+
+}
+
+.flex-row {
+  display: -webkit-flex; /* Safari */
+  display: flex;
+}
+
+.flex-col {
+  -webkit-flex: 1; /* Safari 6.1+ */
+  -ms-flex: 1; /* IE 10 */
+  flex: 1;
+}
+
+.flight-selected {
+  background: #fcf8e3;
+}
+
+#flight_advance_filter{
+  display: none;
+}
+
+.ui-slider{
+  border: 1px solid #2a88bd;
+  border-radius: 3px;
+}
+
+.ui-slider-range{
+  background:#2a88bd;
+}
+
+.ui-slider-handle{
+  background:#2a88bd;
+  border-radius: 50%;
+}
